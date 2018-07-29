@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import { TextInput, View, Text } from 'react-native';
 
-const InputNoLabel = ({
-  value,
-  onChangeText,
-  placeholder,
-  secureTextEntry,
-  autoCorrect,
-}) => {
+const InputNoLabel = props => {
   const { labelStyle, inputStyle, containerStyle } = styles;
+  const {
+    value,
+    onChangeText,
+    placeholder,
+    secureTextEntry,
+    autoCorrect,
+  } = props;
 
   return (
-    <View style={containerStyle}>
+    <View style={{ ...containerStyle, ...props.style }}>
       <TextInput
         underlineColorAndroid="rgba(0,0,0,0)"
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
         autoCorrect={autoCorrect}
-        style={inputStyle}
+        style={{ ...inputStyle, ...props.inputStyle }}
         value={value}
         onChangeText={onChangeText}
       />

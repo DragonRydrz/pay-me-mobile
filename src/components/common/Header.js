@@ -2,16 +2,18 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 const Header = props => {
-  const { textStyle, viewStyle } = styles;
+  const { textStyle, containerStyle } = styles;
   return (
-    <View style={viewStyle}>
-      <Text style={textStyle}>{props.headerText || 'HEADER'}</Text>
+    <View style={{ ...containerStyle, ...props.style }}>
+      <Text style={{ ...textStyle, ...props.textStyle }}>
+        {props.headerText || 'HEADER'}
+      </Text>
     </View>
   );
 };
 
 const styles = {
-  viewStyle: {
+  containerStyle: {
     backgroundColor: '#F8F8F8',
     justifyContent: 'center',
     alignItems: 'center',

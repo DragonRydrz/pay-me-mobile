@@ -3,7 +3,7 @@ import {
   DE_AUTH,
   AUTH_SUCCESS,
   USER,
-} from '../actions/auth';
+} from '../actions/types';
 
 const initialState = {
   message: '',
@@ -11,6 +11,7 @@ const initialState = {
   invoices: [],
   invoiceIdx: 0,
   currentInvoice: '',
+  admin: {},
 };
 
 // const initialState = {
@@ -18,11 +19,14 @@ const initialState = {
 // };
 
 export default function(state = initialState, action) {
+  // console.log(action.type);
   switch (action.type) {
     case USER:
+      console.log(action.payload);
       return { ...state, admin: action.payload };
     case DE_AUTH:
-      return { ...state, invoices: [] };
+      // return { ...state, invoices: [] };
+      return { ...initialState };
     case AUTHENTICATION_ERROR:
       return { ...state, message: action.payload };
     case AUTH_SUCCESS:

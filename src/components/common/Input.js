@@ -7,6 +7,7 @@ const Input = ({
   onChangeText,
   placeholder,
   secureTextEntry,
+  keyboardType,
 }) => {
   const { labelStyle, inputStyle, containerStyle } = styles;
 
@@ -21,6 +22,7 @@ const Input = ({
         style={inputStyle}
         value={value}
         onChangeText={onChangeText}
+        keyboardType={keyboardType}
       />
     </View>
   );

@@ -1,10 +1,15 @@
-import { createStackNavigator } from 'react-navigation';
+import { createSwitchNavigator } from 'react-navigation';
 import LoginScreen from '../screens/auth/LoginScreen';
+import SignUpScreen from '../screens/auth/SignUpScreen';
 
-const AuthFlow = createStackNavigator({
-  Login: {
-    screen: LoginScreen,
+const AuthFlow = createSwitchNavigator(
+  {
+    Login: LoginScreen,
+    SignUp: SignUpScreen,
   },
-});
+  {
+    initialRouteName: 'Login',
+  }
+);
 
 export default AuthFlow;

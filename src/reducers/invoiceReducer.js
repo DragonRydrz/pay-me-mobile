@@ -7,7 +7,7 @@ import {
   ARRAY_MOVE,
   RESET_CURRINV,
 } from '../actions/invoices';
-import { USER_INVOICES } from '../actions/auth';
+import { USER_INVOICES } from '../actions/types';
 
 const initialState = {
   message: '',

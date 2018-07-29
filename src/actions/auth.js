@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { HOST } from '../config';
 
 import {
   AUTHENTICATION_ERROR,
@@ -26,10 +27,11 @@ export function authError(error) {
   }
 }
 
-export function login(credentials, history) {
+export function login(credentials, navigate) {
   return dispatch => {
+    console.log(credentials);
     axios
-      .post('/api/login', credentials, {
+      .post(`${HOST}/api/login`, credentials, {
         headers: { Authorization: `bearer ${getToken()}` },
       })
       .then(res => {
@@ -38,9 +40,9 @@ export function login(credentials, history) {
           res.data.token
         }`;
         console.log(res.data.user);
-        dispatch({ type: 'USER_INVOICES', payload: res.data.user.invoices });
-        dispatch({ type: 'USER', payload: res.data.user });
-        history.push('/invoices');
+        dispatch({ type: USER_INVOICES, payload: res.data.user.invoices });
+        dispatch({ type: USER, payload: res.data.user });
+        navigate('Invoices');
       })
       .catch(err => {
         if (err) console.log('error: ', err);
@@ -51,16 +53,18 @@ export function login(credentials, history) {
   };
 }
 
-export function autoLogin(token, history) {
+export function autoLogin(token, navigate) {
   return dispatch => {
     axios
-      .get('/api/login', { headers: { Authorization: `bearer ${token}` } })
+      .get(`${HOST}/api/login`, {
+        headers: { Authorization: `bearer ${token}` },
+      })
       .then(res => {
         setToken(res.data.token);
         dispatch({ type: 'USER_INVOICES', payload: res.data.user.invoices });
         dispatch({ type: 'USER', payload: res.data.user });
         // console.log(history.location.pathname);
-        if (history.location.pathname === '/') history.push('/invoices');
+        navigate('Invoices');
       })
       .catch(err => {
         if (err) console.log('error: ', err);
@@ -75,16 +79,16 @@ export function updateUser(user) {
   };
 }
 
-export function register(credentials, history) {
+export function register(credentials, navigate) {
   return dispatch => {
     axios
-      .post('/api/register', credentials, {
+      .post(`${HOST}/api/register`, credentials, {
         headers: { Authorization: `bearer ${getToken()}` },
       })
       .then(res => {
         setToken(res.data.token);
         // dispatch({ type: LOGIN, payload: res.data });
-        history.push('/invoices');
+        navigate('Invoices');
       })
       .catch(error => {
         if (error) console.log('error: ', error.response);
@@ -109,7 +113,7 @@ export function logout(history) {
 export function changePassword(newPassword, history) {
   return dispatch => {
     axios
-      .post('/api/changepassword', newPassword, {
+      .post(`${HOST}/api/changepassword`, newPassword, {
         headers: { Authorization: `bearer ${getToken()}` },
       })
       .then(res => {

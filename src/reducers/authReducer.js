@@ -3,11 +3,13 @@ import {
   DE_AUTH,
   AUTH_SUCCESS,
   USER,
+  LOADING,
 } from '../actions/types';
 
 const initialState = {
   message: '',
   success: '',
+  loading: false,
   invoices: [],
   invoiceIdx: 0,
   currentInvoice: '',
@@ -31,6 +33,8 @@ export default function(state = initialState, action) {
       return { ...state, message: action.payload };
     case AUTH_SUCCESS:
       return { ...state, success: action.payload };
+    case LOADING:
+      return { ...state, loading: action.payload };
     default:
       return state;
   }

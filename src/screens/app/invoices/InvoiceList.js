@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SafeAreaView, Text, FlatList } from 'react-native';
+import { SafeAreaView, Text, FlatList, Button as Button2 } from 'react-native';
 import { Card, CardSection, Button } from '../../../components/common';
 import InvoiceBox from '../../../components/InvoiceBox';
 
 class InvoiceList extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { params = {} } = navigation.state;
+    return {
+      title: 'Invoices',
+      headerRight: <Button2 title={'New'} onPress={() => params.addNote()} />,
+      headerLeft: (
+        <Button2 title={'Sign Out'} onPress={() => params.signOut()} />
+      ),
+    };
+  };
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -14,7 +25,7 @@ class InvoiceList extends Component {
           keyExtractor={item => item._id}
           renderItem={({ item }) => InvoiceBox(item)}
         />
-        <CardSection>{this.addInvoiceButton()}</CardSection>
+        {/* <CardSection>{this.addInvoiceButton()}</CardSection> */}
       </SafeAreaView>
     );
   }

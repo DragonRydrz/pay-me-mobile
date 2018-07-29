@@ -1,5 +1,7 @@
 import { AsyncStorage } from 'react-native';
 
+export const LOADING = 'LOADING';
+
 // Invoice Types
 
 export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';

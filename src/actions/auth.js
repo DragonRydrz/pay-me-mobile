@@ -9,6 +9,7 @@ import {
   AUTH_SUCCESS,
   getToken,
   setToken,
+  LOADING,
 } from './types';
 
 // const token = getToken();
@@ -24,7 +25,19 @@ export function authError(error) {
       type: AUTHENTICATION_ERROR,
       payload: error,
     };
+  } else {
+    return {
+      type: AUTHENTICATION_ERROR,
+      payload: '',
+    };
   }
+}
+
+export function loading(x) {
+  return {
+    type: LOADING,
+    payload: x,
+  };
 }
 
 export function login(credentials, navigate) {

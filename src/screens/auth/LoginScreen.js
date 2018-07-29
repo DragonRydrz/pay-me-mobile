@@ -1,8 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { SafeAreaView, Text } from 'react-native';
-import { Card, CardSection, Button, Input } from '../../components/common/';
-import { login, autoLogin } from '../../actions/auth';
+import {
+  Card,
+  CardSection,
+  Button,
+  Input,
+  Spinner,
+} from '../../components/common/';
+import { login, autoLogin, authError, loading } from '../../actions/auth';
 
 class LoginScreen extends Component {
   state = {
@@ -12,6 +18,7 @@ class LoginScreen extends Component {
   };
 
   render() {
+    const { errorTextStyle } = styles;
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <Card>
@@ -33,26 +40,46 @@ class LoginScreen extends Component {
               secureTextEntry
             />
           </CardSection>
-          <CardSection>
-            <Button
-              onPress={() =>
-                this.props.login(this.state, this.props.navigation.navigate)
-              }
-            >
-              Sign In
-            </Button>
-            <Button onPress={() => this.props.navigation.navigate('SignUp')}>
-              Create Account
-            </Button>
-          </CardSection>
+          {this.props.auth.message ? (
+            <Text style={errorTextStyle}>{this.props.auth.message}</Text>
+          ) : null}
+          <CardSection>{this.renderButtons()}</CardSection>
         </Card>
       </SafeAreaView>
     );
   }
+  renderButtons() {
+    return this.props.auth.loading ? (
+      <Spinner />
+    ) : (
+      <Fragment>
+        <Button
+          onPress={() => {
+            this.props.authError();
+            this.props.loading(true);
+            this.props.login(this.state, this.props.navigation.navigate);
+          }}
+        >
+          Sign In
+        </Button>
+        <Button onPress={() => this.props.navigation.navigate('SignUp')}>
+          Create Account
+        </Button>
+      </Fragment>
+    );
+  }
 }
 
+const styles = {
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red',
+  },
+};
+
 const mapStateToProps = state => {
-  return { state: state };
+  return { auth: state.auth };
 };
 
 // const mapDispatchToProps = () => {
@@ -61,5 +88,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { login }
+  { login, authError, loading }
 )(LoginScreen);

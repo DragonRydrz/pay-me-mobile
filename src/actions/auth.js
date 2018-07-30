@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 import { HOST } from '../config';
 
 import {
@@ -114,11 +115,11 @@ export function register(credentials, navigate) {
   };
 }
 
-export function logout(history) {
+export function logout(navigate) {
   return dispatch => {
     dispatch({ type: 'DE_AUTH' });
-    localStorage.removeItem('id');
-    history.push('/');
+    AsyncStorage.removeItem('jwt');
+    navigate('Auth');
   };
 }
 // { header: { Authorization: `bearer ${token}` } }

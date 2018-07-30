@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { SafeAreaView, Text } from 'react-native';
+import { AsyncStorage, SafeAreaView, Text } from 'react-native';
 import {
   Card,
   CardSection,
@@ -16,6 +16,16 @@ class LoginScreen extends Component {
     username: 'DragonRydrz@me.com',
     password: '123456',
   };
+
+  componentWillMount() {
+    AsyncStorage.getItem('jwt')
+      .then(token => {
+        if (token) {
+          this.props.autoLogin(token, this.props.navigation.navigate);
+        }
+      })
+      .catch(err => console.log(err));
+  }
 
   render() {
     const { errorTextStyle } = styles;
@@ -88,5 +98,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { login, authError, loading }
+  { login, authError, loading, autoLogin }
 )(LoginScreen);

@@ -24,7 +24,6 @@ export default function(state = initialState, action) {
   // console.log(action.type);
   switch (action.type) {
     case USER:
-      console.log(action.payload);
       return { ...state, admin: action.payload };
     case DE_AUTH:
       // return { ...state, invoices: [] };

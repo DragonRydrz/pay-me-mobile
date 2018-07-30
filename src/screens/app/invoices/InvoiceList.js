@@ -3,23 +3,32 @@ import { connect } from 'react-redux';
 import { SafeAreaView, Text, FlatList, Button as Button2 } from 'react-native';
 import { Card, CardSection, Button } from '../../../components/common';
 import InvoiceBox from '../../../components/InvoiceBox';
+import { logout } from '../../../actions/auth';
 
 class InvoiceList extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     return {
       title: 'Invoices',
-      headerRight: <Button2 title={'New'} onPress={() => params.addNote()} />,
+      headerRight: (
+        <Button2 title={'New'} onPress={() => params.addinvoice()} />
+      ),
       headerLeft: (
-        <Button2 title={'Sign Out'} onPress={() => params.signOut()} />
+        <Button2 title={'Sign Out'} onPress={() => params.logout()} />
       ),
     };
   };
 
+  componentDidMount() {
+    this.props.navigation.setParams({
+      logout: () => this.props.logout(this.props.navigation.navigate),
+    });
+    this.setState({ filteredNotes: this.props.notes });
+  }
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        {console.log(this.props.subscription, this.props.invoiceCredits)}
         <FlatList
           data={this.props.invoice.invoices}
           keyExtractor={item => item._id}
@@ -59,4 +68,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(InvoiceList);
+export default connect(
+  mapStateToProps,
+  { logout }
+)(InvoiceList);

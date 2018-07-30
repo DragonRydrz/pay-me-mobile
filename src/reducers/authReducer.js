@@ -9,7 +9,7 @@ import {
 const initialState = {
   message: '',
   success: '',
-  loading: false,
+  isLoading: false,
   invoices: [],
   invoiceIdx: 0,
   currentInvoice: '',

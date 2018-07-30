@@ -58,9 +58,12 @@ export function login(credentials, navigate) {
         dispatch({ type: USER, payload: res.data.user });
         navigate('Invoices');
       })
-      .catch(err => {
-        if (err) console.log('error: ', err);
-        if (err.response) {
+      .catch(error => {
+        // console.log(error.response);
+        // dispatch(authError(error.response.data.message));
+
+        if (error) console.log('error: ', error);
+        if (error.response) {
           dispatch(authError('Username/Password invalid.'));
         }
       });
@@ -105,12 +108,13 @@ export function register(credentials, navigate) {
         navigate('Invoices');
       })
       .catch(error => {
-        if (error) console.log('error: ', error.response);
-        else if (error.response.data.err.errors) {
-          dispatch(authError('Your username must be a valid email address.'));
-        } else if (error.response.data.err.errmsg) {
-          dispatch(authError('This username already exists.'));
-        }
+        dispatch(authError(error.response.data.message));
+        // if (error) console.log('error: ', error.response);
+        // else if (error.response.data.err.errors) {
+        //   dispatch(authError('Your username must be a valid email address.'));
+        // } else if (error.response.data.err.errmsg) {
+        //   dispatch(authError('This username already exists.'));
+        // }
       });
   };
 }
@@ -138,8 +142,10 @@ export function changePassword(newPassword, history) {
         // history.push('/invoices');
       })
       .catch(error => {
-        if (error) console.log('error: ', error.response);
-        dispatch(authError('Error changing your password', error));
+        dispatch(authError(error.response.data.message));
+
+        // if (error) console.log('error: ', error.response);
+        // dispatch(authError('Error changing your password', error));
       });
   };
 }

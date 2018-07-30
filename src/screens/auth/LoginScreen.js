@@ -7,14 +7,17 @@ import {
   Button,
   Input,
   Spinner,
+  Header,
 } from '../../components/common/';
 import { login, autoLogin, authError, loading } from '../../actions/auth';
 
 class LoginScreen extends Component {
   state = {
     // TODO: Delete initial credentials.  Used for quick login access in development.
-    username: 'DragonRydrz@me.com',
+    username: 'reactnative@test.com',
     password: '123456',
+    // username: 'DragonRydrz@me.com',
+    // password: '123456',
   };
 
   componentWillMount() {
@@ -31,6 +34,9 @@ class LoginScreen extends Component {
     const { errorTextStyle } = styles;
     return (
       <SafeAreaView style={{ flex: 1 }}>
+        <Card>
+          <Header headerText="Sign In" />
+        </Card>
         <Card>
           <CardSection>
             <Input
@@ -50,8 +56,8 @@ class LoginScreen extends Component {
               secureTextEntry
             />
           </CardSection>
-          {this.props.auth.message ? (
-            <Text style={errorTextStyle}>{this.props.auth.message}</Text>
+          {this.props.message ? (
+            <Text style={errorTextStyle}>{this.props.message}</Text>
           ) : null}
           <CardSection>{this.renderButtons()}</CardSection>
         </Card>
@@ -59,7 +65,7 @@ class LoginScreen extends Component {
     );
   }
   renderButtons() {
-    return this.props.auth.loading ? (
+    return this.props.isLoading ? (
       <Spinner />
     ) : (
       <Fragment>
@@ -82,6 +88,8 @@ class LoginScreen extends Component {
 
 const styles = {
   errorTextStyle: {
+    padding: 5,
+    textAlign: 'center',
     fontSize: 20,
     alignSelf: 'center',
     color: 'red',
@@ -89,7 +97,11 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-  return { auth: state.auth };
+  const { isLoading, message } = state.auth;
+  return {
+    isLoading,
+    message,
+  };
 };
 
 // const mapDispatchToProps = () => {

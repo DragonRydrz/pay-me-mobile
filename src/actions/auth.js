@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
-import { HOST } from '../config';
+import { HOST } from '../../config';
 
 import {
   AUTHENTICATION_ERROR,

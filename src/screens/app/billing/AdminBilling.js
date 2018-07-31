@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   SafeAreaView,
   View,
@@ -26,17 +26,21 @@ class AdminBilling extends Component {
       <SafeAreaView
         style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
       >
+        <Text>Select option:</Text>
         <TouchableOpacity
           onPress={() => this.setState({ showTypePicker: true })}
         >
           <Text>{this.state.type.label}</Text>
         </TouchableOpacity>
         {this.state.type.value === 'credit' ? (
-          <TouchableOpacity
-            onPress={() => this.setState({ showQuantityPicker: true })}
-          >
-            <Text>{this.state.quantity}</Text>
-          </TouchableOpacity>
+          <Fragment>
+            <Text>Select Quantity</Text>
+            <TouchableOpacity
+              onPress={() => this.setState({ showQuantityPicker: true })}
+            >
+              <Text>{this.state.quantity}</Text>
+            </TouchableOpacity>
+          </Fragment>
         ) : null}
         {this.state.showTypePicker
           ? this.typePicker()

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import StripeWebView from './StripeWebView';
-import { HOST } from '../../../config';
+import { HOST } from '../../../../config';
 
 class ConnectStripe extends Component {
   state = {

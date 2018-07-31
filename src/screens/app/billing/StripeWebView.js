@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SafeAreaView, WebView } from 'react-native';
 import { connect } from 'react-redux';
-import { HOST } from '../../../config';
+import { HOST } from '../../../../config';
 import { autoLogin } from '../../../actions/auth';
 
 class StripeWebView extends Component {

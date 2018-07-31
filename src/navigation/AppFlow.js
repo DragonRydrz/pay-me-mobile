@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from 'react-navigation';
 import InvoicesFlow from './InvoicesFlow';
 import RemindersScreen from '../screens/app/RemindersScreen';
-import BillingScreen from '../screens/app/BillingScreen';
+import BillingScreen from '../screens/app/billing/BillingScreen';
 import SettingsScreen from '../screens/app/SettingsScreen';
 
 const AppFlow = createBottomTabNavigator(
@@ -12,7 +12,7 @@ const AppFlow = createBottomTabNavigator(
     Settings: SettingsScreen,
   },
   {
-    initialRouteName: 'Invoices',
+    initialRouteName: 'Billing',
   }
 );
 

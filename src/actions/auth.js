@@ -81,7 +81,7 @@ export function autoLogin(token, navigate) {
         dispatch({ type: 'USER_INVOICES', payload: res.data.user.invoices });
         dispatch({ type: 'USER', payload: res.data.user });
         // console.log(history.location.pathname);
-        navigate('Invoices');
+        if (navigate) navigate('App');
       })
       .catch(err => {
         if (err) console.log('error: ', err);

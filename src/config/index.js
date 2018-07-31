@@ -1,1 +1,10 @@
 export const HOST = 'http://localhost:5000';
+export const TWILIO_SID = 'ACd2cd171a5b87403992afeb91c01943cc';
+export const TWILIO_TOKEN = '39523d72c223c5218b9bd956148cb03f';
+export const TWILIO_NUMBER = '+16788466861';
+export const MY_NUMBER = '+1';
+export const STRIPE_SK = 'sk_test_Fs1LY0tVFABeh3TFOWBLmBo3';
+export const STRIPE_PK = 'pk_test_ILI7ZfrCQbKaNU5WAVRa6yg6';
+export const STRIPE_CLIENT_ID = 'ca_DIPmYP93i1r80MASr6O97fQQGNKoz2Jd';
+export const DATA_BASE = 'mongodb://localhost:27017/givememymoney';
+export const SECRET = 'LoTsOfMoNeY';
